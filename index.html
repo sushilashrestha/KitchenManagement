@@ -20,14 +20,12 @@
             <button onclick="showSection('inventory')" class="nav-btn active">
                 <i class="fas fa-boxes"></i> Inventory
             </button>
-            <a href="/Recipes/recipes.html">
+            <a href="/Recipes/recipes.html" style="text-decoration:none;">
               <button onclick="showSection('recipes')" class="nav-btn">
                 <i class="fas fa-book-open"></i> Recipes
               </button>
             </a>
-            <button onclick="showSection('shopping')" class="nav-btn">
-                <i class="fas fa-shopping-cart"></i> Shopping List
-            </button>
+        
         </nav>
     </header>
 
@@ -48,22 +46,22 @@
                 <!-- Category Quick Stats -->
                 <div class="category-stats">
                     <div class="stat-card">
-                        <img src="/api/placeholder/64/64" alt="Produce" class="category-icon">
+                        
                         <h3>Produce</h3>
                         <p class="stat-number" id="produceCount">0 items</p>
                     </div>
                     <div class="stat-card">
-                        <img src="/api/placeholder/64/64" alt="Dairy" class="category-icon">
+                        
                         <h3>Dairy</h3>
                         <p class="stat-number" id="dairyCount">0 items</p>
                     </div>
                     <div class="stat-card">
-                        <img src="/api/placeholder/64/64" alt="Meat" class="category-icon">
+                        
                         <h3>Meat</h3>
                         <p class="stat-number" id="meatCount">0 items</p>
                     </div>
                     <div class="stat-card">
-                        <img src="/api/placeholder/64/64" alt="Pantry" class="category-icon">
+                        
                         <h3>Pantry</h3>
                         <p class="stat-number" id="pantryCount">0 items</p>
                     </div>
@@ -130,82 +128,38 @@
                         </button>
                     </div>
                     <div id="inventoryList" class="grid-list">
-                        <!-- Items will be dynamically added here -->
+                        <!-- Dummy data for inventory items -->
+                        <div class="inventory-item" data-category="produce">
+                            <h4>Apples</h4>
+                            <p>Quantity: 10</p>
+                            <p>Expiration Date: 2023-12-01</p>
+                        </div>
+                        <div class="inventory-item" data-category="dairy">
+                            <h4>Milk</h4>
+                            <p>Quantity: 2</p>
+                            <p>Expiration Date: 2023-11-15</p>
+                        </div>
+                        <div class="inventory-item" data-category="meat">
+                            <h4>Chicken Breast</h4>
+                            <p>Quantity: 5</p>
+                            <p>Expiration Date: 2023-11-20</p>
+                        </div>
+                        <div class="inventory-item" data-category="pantry">
+                            <h4>Pasta</h4>
+                            <p>Quantity: 3</p>
+                            <p>Expiration Date: 2024-01-10</p>
+                        </div>
+                        <div class="inventory-item" data-category="spices">
+                            <h4>Salt</h4>
+                            <p>Quantity: 1</p>
+                            <p>Expiration Date: 2025-05-01</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Recipes Section -->
-        <section id="recipes" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2><i class="fas fa-book-open"></i> Recipes</h2>
-                    <button class="add-item" onclick="toggleForm('recipeForm')">
-                        <i class="fas fa-plus"></i> Add New Recipe
-                    </button>
-                </div>
-
-                <!-- Recipe Form -->
-                <div id="recipeForm" class="form-container">
-                    <div class="form-group">
-                        <label for="recipeName">Recipe Name:</label>
-                        <input type="text" id="recipeName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipeIngredients">Ingredients:</label>
-                        <textarea id="recipeIngredients" rows="4" placeholder="Enter ingredients, one per line"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipeInstructions">Instructions:</label>
-                        <textarea id="recipeInstructions" rows="6" placeholder="Enter cooking instructions"></textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <button onclick="addRecipe()" class="primary">Add Recipe</button>
-                        <button onclick="toggleForm('recipeForm')" class="secondary">Cancel</button>
-                    </div>
-                </div>
-
-                <!-- Recipe List -->
-                <div id="recipeList" class="grid-list">
-                    <!-- Recipes will be dynamically added here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Shopping List Section -->
-        <section id="shopping" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2><i class="fas fa-shopping-cart"></i> Shopping List</h2>
-                    <button class="add-item" onclick="toggleForm('shoppingForm')">
-                        <i class="fas fa-plus"></i> Add Item
-                    </button>
-                </div>
-
-                <!-- Shopping List Form -->
-                <div id="shoppingForm" class="form-container">
-                    <div class="form-group">
-                        <label for="shoppingItem">Item Name:</label>
-                        <input type="text" id="shoppingItem" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="shoppingQuantity">Quantity:</label>
-                        <input type="number" id="shoppingQuantity" min="1" value="1" required>
-                    </div>
-                    <div class="form-buttons">
-                        <button onclick="addToShoppingList()" class="primary">Add to List</button>
-                        <button onclick="toggleForm('shoppingForm')" class="secondary">Cancel</button>
-                    </div>
-                </div>
-
-                <!-- Shopping List -->
-                <ul id="shoppingList" class="checklist">
-                    <!-- Shopping items will be dynamically added here -->
-                </ul>
-            </div>
-        </section>
+       
     </main>
-
+    <script src="main.js"></script>
 </body>
 </html>
