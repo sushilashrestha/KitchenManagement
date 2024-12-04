@@ -1,83 +1,81 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+let recipeList = [];
+let recommendedRecipes = [];
+
+function addRecipe() {
+  const name = document.getElementById('recipeName').value;
+  const image = document.getElementById('recipeImage').files[0];
+  const ingredients = document.getElementById('ingredients').value;
+  const instructions = document.getElementById('instructions').value;
+
+  if (name && ingredients && instructions) {
+    const recipe = {
+      id: Date.now(),
+      name,
+      image: image ? URL.createObjectURL(image) : 'https://via.placeholder.com/300x200/FFFFFF/FFFFFF?text=No+Image',
+      ingredients,
+      instructions,
+    };
+    recipeList.push(recipe);
+    renderRecipes();
+    document.getElementById('addRecipeForm').reset();
   }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+}
+
+function renderRecipes() {
+  const recipeListContainer = document.getElementById('recipeList');
+  const recommendedRecipesContainer = document.getElementById('recommendedRecipes');
+
+  recipeListContainer.innerHTML = '';
+  recommendedRecipesContainer.innerHTML = '';
+
+  // Render all recipes
+  recipeList.forEach(recipe => {
+    const recipeBox = document.createElement('div');
+    recipeBox.className = 'recipe-box';
+    recipeBox.innerHTML = `
+      <img src="${recipe.image}" alt="${recipe.name}">
+      <h3>${recipe.name}</h3>
+      <button onclick="toggleRecipeDetails(${recipe.id})">View Details</button>
+      <button onclick="removeRecipe(${recipe.id})">Remove</button>
+      <div id="details-${recipe.id}" class="recipe-details">
+        <h4>Ingredients:</h4>
+        <p>${recipe.ingredients}</p>
+        <h4>Instructions:</h4>
+        <p>${recipe.instructions}</p>
+      </div>
+    `;
+    recipeListContainer.appendChild(recipeBox);
+  });
+
+  // Render 4 random recommended recipes
+  let randomRecipes = [...recipeList];
+  shuffleArray(randomRecipes);
+  randomRecipes = randomRecipes.slice(0, 4);
+
+  randomRecipes.forEach(recipe => {
+    const recommendedBox = document.createElement('div');
+    recommendedBox.className = 'recipe-box';
+    recommendedBox.innerHTML = `
+      <img src="${recipe.image}" alt="${recipe.name}">
+      <h3>${recipe.name}</h3>
+    `;
+    recommendedRecipesContainer.appendChild(recommendedBox);
+  });
+}
+
+function toggleRecipeDetails(id) {
+  const details = document.getElementById(`details-${id}`);
+  details.style.display = details.style.display === 'block' ? 'none' : 'block';
+}
+
+function removeRecipe(id) {
+  recipeList = recipeList.filter(recipe => recipe.id !== id);
+  renderRecipes();
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  section {
-    margin-bottom: 30px;
-  }
-  
-  .search-section input {
-    width: 60%;
-    padding: 10px;
-    margin-right: 10px;
-  }
-  
-  .search-section button {
-    padding: 10px 15px;
-    cursor: pointer;
-  }
-  
-  .add-recipe-section form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .add-recipe-section label {
-    margin-top: 10px;
-  }
-  
-  .add-recipe-section input,
-  .add-recipe-section textarea {
-    margin-top: 5px;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .add-recipe-section button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    cursor: pointer;
-  }
-  
-  .recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .recipe-box {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  .recipe-box img {
-    max-width: 100%;
-    border-radius: 5px;
-  }
-  
-  .recipe-box h3 {
-    margin: 10px 0;
-  }
-  
-  .recipe-box button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
+}
