@@ -1,21 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kitchen Management App</title>
-  <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Management App</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <header>
-    <div class="logo">Kitchen Manager</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="./Dashboard/dashboard.html">Dashboard</a></li>
-        <li><a href="./Recipes/recipes.html">Recipes</a></li>
-        <li><a href="./Inventory/inventory.html">Inventory</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <div class="navbar">
+            <h1>Kitchen Manager</h1>
+            <nav>
+              <ul class="nav-links">
+                <li><a href="./Dashboard/dashboard.html">Dashboard</a></li>
+                <li><a href="./Recipes/recipes.html">Recipes</a></li>
+                <li><a href="./Inventory/inventory.html">Inventory</a></li>
+              </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+      
+        <section class="welcome">
+            <h2>Welcome to Your Kitchen Dashboard</h2>
+            <p>Manage your kitchen inventory, plan meals, and track shopping lists with ease.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Inventory</h3>
+                <p>Track your kitchen ingredients and their quantities.</p>
+                <button onclick="navigateTo('inventory')">Manage Inventory</button>
+            </div>
+
+            <div class="feature-card">
+                <h3>Meal Planning</h3>
+                <p>Plan meals for the week and ensure you have all the ingredients.</p>
+                <button onclick="navigateTo('meal-planning')">Plan Meals</button>
+            </div>
+
+            <div class="feature-card">
+                <h3>Shopping List</h3>
+                <p>Generate shopping lists based on your inventory and meal plans.</p>
+                <button onclick="navigateTo('shopping-list')">View Shopping List</button>
+            </div>
+
+            <div class="feature-card">
+                <h3>Recipes</h3>
+                <p>Discover new recipes and save your favorites.</p>
+                <button onclick="navigateTo('recipes')">Browse Recipes</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Kitchen Manager. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
