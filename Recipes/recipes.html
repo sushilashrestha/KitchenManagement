@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Untitled-1.css">
 </head>
 <body>
     <div class="app-container">
@@ -12,44 +12,50 @@
         <header class="app-header">
             <h1>Mr. Cook</h1>
             <div class="header-icons">
-                <button class="icon-button">+</button>
+                <button class="icon-button" id="addRecipeButton">+</button>
                 <button class="icon-button">⚙️</button>
             </div>
         </header>
 
-        <!-- Navigation -->
-        <nav class="navigation-bar">
-            <button class="nav-button active">Recipes</button>
-            <button class="nav-button">Shopping</button>
-            <button class="nav-button">Cookbooks</button>
-            <button class="nav-button">Profile</button>
-        </nav>
-
         <!-- Search Section -->
         <div class="search-section">
-            <input type="text" id="searchRecipe" placeholder="Search by title, ingredients, or tags">
+            <input type="text" id="searchRecipe" placeholder="🔍 Search by title, ingredients, or tags">
             <button class="filter-button">Filters</button>
         </div>
 
         <!-- Recipe List -->
-        <div class="recipe-list">
-            <div class="recipe-card">
-                <img src="https://via.placeholder.com/200" alt="Recipe 1">
-                <p>Buttered Scallop Sweet Potato Puffs</p>
+        <h2 class="section-title">Your Recipes</h2>
+        <div class="recipe-list" id="recipeList">
+            <!-- Recipes will dynamically populate here -->
+        </div>
+    </div>
+
+    <!-- Add Recipe Modal -->
+    <div class="modal" id="addRecipeModal">
+        <div class="modal-content">
+            <h2>Add Recipe</h2>
+            <label for="recipeTitle">Recipe Title</label>
+            <input type="text" id="recipeTitle" placeholder="Enter recipe name">
+            
+            <label for="recipeImage">Recipe Image URL</label>
+            <input type="text" id="recipeImage" placeholder="Enter image URL">
+
+            <div class="dynamic-section">
+                <label>Ingredients</label>
+                <div id="ingredientsList"></div>
+                <button class="add-button" id="addIngredient">+ Add Ingredient</button>
             </div>
-            <div class="recipe-card">
-                <img src="https://via.placeholder.com/200" alt="Recipe 2">
-                <p>Citrus Eggplant Frost</p>
+
+            <div class="dynamic-section">
+                <label>Instructions</label>
+                <div id="instructionsList"></div>
+                <button class="add-button" id="addInstruction">+ Add Instruction</button>
             </div>
-            <div class="recipe-card">
-                <img src="https://via.placeholder.com/200" alt="Recipe 3">
-                <p>Gluten-Free Spring Rolls</p>
-            </div>
-            <div class="recipe-card">
-                <img src="https://via.placeholder.com/200" alt="Recipe 4">
-                <p>Homemade Artisan Bread</p>
-            </div>
+
+            <button class="save-button" id="saveRecipe">Save Recipe</button>
+            <button class="cancel-button" id="cancelRecipe">Cancel</button>
         </div>
     </div>
 </body>
+<script src="Untitled-1.js"></script>
 </html>
