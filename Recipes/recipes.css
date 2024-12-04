@@ -37,30 +37,6 @@ body {
     cursor: pointer;
 }
 
-.navigation-bar {
-    display: flex;
-    justify-content: space-evenly;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    background: #f1f1f1;
-}
-
-.nav-button {
-    background: none;
-    border: none;
-    font-size: 14px;
-    padding: 10px 0;
-    flex-grow: 1;
-    text-align: center;
-    color: #555;
-    cursor: pointer;
-}
-
-.nav-button.active {
-    font-weight: bold;
-    color: #4caf50;
-}
-
 .search-section {
     display: flex;
     padding: 10px;
