@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Kitchen Management System</h1>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#inventory">Inventory</a></li>
+                <li><a href="#recipes">Recipes</a></li>
+                <li><a href="#tasks">Tasks</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Inventory Section -->
+        <section id="inventory" class="section">
+            <div class="container">
+                <h2>Inventory</h2>
+                <button class="add-item" onclick="toggleForm('inventoryForm')">Add New Item</button>
+                
+                <!-- Inventory Form -->
+                <div id="inventoryForm" class="form-container">
+                    <input type="text" id="itemName" placeholder="Item Name">
+                    <input type="number" id="itemQuantity" placeholder="Quantity">
+                    <input type="text" id="itemLocation" placeholder="Storage Location">
+                    <button onclick="addItem()">Add Item</button>
+                    <button onclick="toggleForm('inventoryForm')">Cancel</button>
+                </div>
+
+                <ul id="inventoryList">
+                    <!-- Inventory items will be dynamically added here -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Recipes Section -->
+        <section id="recipes" class="section">
+            <div class="container">
+                <h2>Recipes</h2>
+                <button class="add-recipe" onclick="toggleForm('recipeForm')">Add New Recipe</button>
+                
+                <!-- Recipe Form -->
+                <div id="recipeForm" class="form-container">
+                    <input type="text" id="recipeName" placeholder="Recipe Name">
+                    <textarea id="recipeInstructions" placeholder="Recipe Instructions"></textarea>
+                    <button onclick="addRecipe()">Add Recipe</button>
+                    <button onclick="toggleForm('recipeForm')">Cancel</button>
+                </div>
+
+                <ul id="recipeList">
+                    <!-- Recipes will be dynamically added here -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="section">
+            <div class="container">
+                <h2>Tasks</h2>
+                <button class="add-task" onclick="toggleForm('taskForm')">Add New Task</button>
+                
+                <!-- Task Form -->
+                <div id="taskForm" class="form-container">
+                    <input type="text" id="taskName" placeholder="Task Name">
+                    <button onclick="addTask()">Add Task</button>
+                    <button onclick="toggleForm('taskForm')">Cancel</button>
+                </div>
+
+                <ul id="taskList">
+                    <!-- Tasks will be dynamically added here -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section">
+            <div class="container">
+                <h2>User Settings</h2>
+                <form id="settingsForm">
+                    <label for="theme">Select Theme:</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+
+                    <label for="notifications">Enable Notifications:</label>
+                    <input type
