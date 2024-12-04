@@ -1,9 +1,10 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 .app-container {
@@ -19,13 +20,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 20px;
     background: #4caf50;
     color: white;
+    border-bottom: 1px solid #ddd;
 }
 
 .app-header h1 {
-    font-size: 18px;
+    font-size: 20px;
     margin: 0;
 }
 
@@ -33,13 +35,13 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
 }
 
 .search-section {
     display: flex;
-    padding: 10px;
+    padding: 15px 10px;
     gap: 10px;
     background: #fff;
     border-bottom: 1px solid #ddd;
@@ -47,38 +49,61 @@ body {
 
 .search-section input {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-section input::placeholder {
+    color: #999;
 }
 
 .filter-button {
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
     background: #4caf50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
+    transition: background 0.3s;
+}
+
+.filter-button:hover {
+    background: #45a049;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 18px;
+    padding: 10px 15px;
+    color: #4caf50;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
 }
 
 /* Recipe Cards */
 .recipe-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
+    gap: 15px;
+    padding: 15px;
     background: #fff;
 }
 
 .recipe-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
-    text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: #fff;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .recipe-card img {
@@ -86,8 +111,29 @@ body {
     height: auto;
 }
 
-.recipe-card p {
+.recipe-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.recipe-title {
     font-size: 14px;
-    margin: 10px;
+    font-weight: bold;
+    margin: 10px 0;
     color: #333;
+}
+
+.recipe-action {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #4caf50;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.recipe-action:hover {
+    background: #45a049;
 }
