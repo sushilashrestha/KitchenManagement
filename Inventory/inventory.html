@@ -6,17 +6,27 @@
     <title>Kitchen Management System</title>
     <link rel="stylesheet" href="inventory.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1><i class="fas fa-utensils"></i> Kitchen Management System</h1>
-            <nav>
-                <button onclick="showSection('inventory')" class="nav-btn active">Inventory</button>
-                <button onclick="showSection('recipes')" class="nav-btn">Recipes</button>
-                <button onclick="showSection('shopping')" class="nav-btn">Shopping List</button>
-            </nav>
+        <div class="hero-section">
+            <div class="container">
+                <h1><i class="fas fa-utensils"></i> Kitchen Management System</h1>
+                <p class="hero-text">Organize your kitchen inventory, recipes, and shopping list efficiently</p>
+            </div>
         </div>
+        <nav class="container">
+            <button onclick="showSection('inventory')" class="nav-btn active">
+                <i class="fas fa-boxes"></i> Inventory
+            </button>
+            <button onclick="showSection('recipes')" class="nav-btn">
+                <i class="fas fa-book-open"></i> Recipes
+            </button>
+            <button onclick="showSection('shopping')" class="nav-btn">
+                <i class="fas fa-shopping-cart"></i> Shopping List
+            </button>
+        </nav>
     </header>
 
     <main>
@@ -24,38 +34,70 @@
         <section id="inventory" class="section active">
             <div class="container">
                 <div class="section-header">
-                    <h2><i class="fas fa-boxes"></i> Inventory</h2>
+                    <h2><i class="fas fa-boxes"></i> Inventory Management</h2>
                     <div class="controls">
-                        <input type="text" id="inventorySearch" placeholder="Search inventory..." onkeyup="searchInventory()">
+                        <input type="text" id="inventorySearch" placeholder="Search inventory...">
                         <button class="add-item" onclick="toggleForm('inventoryForm')">
                             <i class="fas fa-plus"></i> Add New Item
                         </button>
                     </div>
                 </div>
 
+                <!-- Category Quick Stats -->
+                <div class="category-stats">
+                    <div class="stat-card">
+                        <img src="/api/placeholder/64/64" alt="Produce" class="category-icon">
+                        <h3>Produce</h3>
+                        <p class="stat-number" id="produceCount">0 items</p>
+                    </div>
+                    <div class="stat-card">
+                        <img src="/api/placeholder/64/64" alt="Dairy" class="category-icon">
+                        <h3>Dairy</h3>
+                        <p class="stat-number" id="dairyCount">0 items</p>
+                    </div>
+                    <div class="stat-card">
+                        <img src="/api/placeholder/64/64" alt="Meat" class="category-icon">
+                        <h3>Meat</h3>
+                        <p class="stat-number" id="meatCount">0 items</p>
+                    </div>
+                    <div class="stat-card">
+                        <img src="/api/placeholder/64/64" alt="Pantry" class="category-icon">
+                        <h3>Pantry</h3>
+                        <p class="stat-number" id="pantryCount">0 items</p>
+                    </div>
+                </div>
+
                 <!-- Inventory Form -->
                 <div id="inventoryForm" class="form-container">
-                    <div class="form-group">
-                        <label for="itemName">Item Name:</label>
-                        <input type="text" id="itemName" required>
+                    <div class="form-header">
+                        <h3>Add New Item</h3>
+                        <button onclick="toggleForm('inventoryForm')" class="close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="itemQuantity">Quantity:</label>
-                        <input type="number" id="itemQuantity" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="itemCategory">Category:</label>
-                        <select id="itemCategory" required>
-                            <option value="produce">Produce</option>
-                            <option value="dairy">Dairy</option>
-                            <option value="meat">Meat</option>
-                            <option value="pantry">Pantry</option>
-                            <option value="spices">Spices</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="expirationDate">Expiration Date:</label>
-                        <input type="date" id="expirationDate">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="itemName">Item Name:</label>
+                            <input type="text" id="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemQuantity">Quantity:</label>
+                            <input type="number" id="itemQuantity" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemCategory">Category:</label>
+                            <select id="itemCategory" required>
+                                <option value="produce">Produce</option>
+                                <option value="dairy">Dairy</option>
+                                <option value="meat">Meat</option>
+                                <option value="pantry">Pantry</option>
+                                <option value="spices">Spices</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expirationDate">Expiration Date:</label>
+                            <input type="date" id="expirationDate">
+                        </div>
                     </div>
                     <div class="form-buttons">
                         <button onclick="addItem()" class="primary">Add Item</button>
@@ -66,16 +108,28 @@
                 <!-- Inventory List -->
                 <div class="inventory-container">
                     <div class="filters">
-                        <button class="filter-btn active" onclick="filterItems('all')">All</button>
-                        <button class="filter-btn" onclick="filterItems('produce')">Produce</button>
-                        <button class="filter-btn" onclick="filterItems('dairy')">Dairy</button>
-                        <button class="filter-btn" onclick="filterItems('meat')">Meat</button>
-                        <button class="filter-btn" onclick="filterItems('pantry')">Pantry</button>
-                        <button class="filter-btn" onclick="filterItems('spices')">Spices</button>
+                        <button class="filter-btn active" onclick="filterItems('all')">
+                            <i class="fas fa-th-large"></i> All
+                        </button>
+                        <button class="filter-btn" onclick="filterItems('produce')">
+                            <i class="fas fa-carrot"></i> Produce
+                        </button>
+                        <button class="filter-btn" onclick="filterItems('dairy')">
+                            <i class="fas fa-cheese"></i> Dairy
+                        </button>
+                        <button class="filter-btn" onclick="filterItems('meat')">
+                            <i class="fas fa-drumstick-bite"></i> Meat
+                        </button>
+                        <button class="filter-btn" onclick="filterItems('pantry')">
+                            <i class="fas fa-box"></i> Pantry
+                        </button>
+                        <button class="filter-btn" onclick="filterItems('spices')">
+                            <i class="fas fa-pepper-hot"></i> Spices
+                        </button>
                     </div>
-                    <ul id="inventoryList" class="grid-list">
+                    <div id="inventoryList" class="grid-list">
                         <!-- Items will be dynamically added here -->
-                    </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -138,169 +192,7 @@
                         <input type="number" id="shoppingQuantity" min="1" value="1" required>
                     </div>
                     <div class="form-buttons">
-                        <button on<!DOCTYPE html>
-                            <html lang="en">
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <title>Kitchen Management System</title>
-                                <link rel="stylesheet" href="inventory.css">
-                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-                                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-                            </head>
-                            <body>
-                                <header>
-                                    <div class="hero-section">
-                                        <div class="container">
-                                            <h1><i class="fas fa-utensils"></i> Kitchen Management System</h1>
-                                            <p class="hero-text">Organize your kitchen inventory, recipes, and shopping list efficiently</p>
-                                        </div>
-                                    </div>
-                                    <nav class="container">
-                                        <button onclick="showSection('inventory')" class="nav-btn active">
-                                            <i class="fas fa-boxes"></i> Inventory
-                                        </button>
-                                        <button onclick="showSection('recipes')" class="nav-btn">
-                                            <i class="fas fa-book-open"></i> Recipes
-                                        </button>
-                                        <button onclick="showSection('shopping')" class="nav-btn">
-                                            <i class="fas fa-shopping-cart"></i> Shopping List
-                                        </button>
-                                    </nav>
-                                </header>
-                            
-                                <main>
-                                    <!-- Inventory Section -->
-                                    <section id="inventory" class="section active">
-                                        <div class="container">
-                                            <div class="section-header">
-                                                <h2><i class="fas fa-boxes"></i> Inventory Management</h2>
-                                                <div class="controls">
-                                                    <input type="text" id="inventorySearch" placeholder="Search inventory...">
-                                                    <button class="add-item" onclick="toggleForm('inventoryForm')">
-                                                        <i class="fas fa-plus"></i> Add New Item
-                                                    </button>
-                                                </div>
-                                            </div>
-                            
-                                            <!-- Category Quick Stats -->
-                                            <div class="category-stats">
-                                                <div class="stat-card">
-                                                    <img src="/api/placeholder/64/64" alt="Produce" class="category-icon">
-                                                    <h3>Produce</h3>
-                                                    <p class="stat-number" id="produceCount">0 items</p>
-                                                </div>
-                                                <div class="stat-card">
-                                                    <img src="/api/placeholder/64/64" alt="Dairy" class="category-icon">
-                                                    <h3>Dairy</h3>
-                                                    <p class="stat-number" id="dairyCount">0 items</p>
-                                                </div>
-                                                <div class="stat-card">
-                                                    <img src="/api/placeholder/64/64" alt="Meat" class="category-icon">
-                                                    <h3>Meat</h3>
-                                                    <p class="stat-number" id="meatCount">0 items</p>
-                                                </div>
-                                                <div class="stat-card">
-                                                    <img src="/api/placeholder/64/64" alt="Pantry" class="category-icon">
-                                                    <h3>Pantry</h3>
-                                                    <p class="stat-number" id="pantryCount">0 items</p>
-                                                </div>
-                                            </div>
-                            
-                                            <!-- Inventory Form -->
-                                            <div id="inventoryForm" class="form-container">
-                                                <div class="form-header">
-                                                    <h3>Add New Item</h3>
-                                                    <button onclick="toggleForm('inventoryForm')" class="close-btn">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="form-grid">
-                                                    <div class="form-group">
-                                                        <label for="itemName">Item Name:</label>
-                                                        <input type="text" id="itemName" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="itemQuantity">Quantity:</label>
-                                                        <input type="number" id="itemQuantity" min="1" value="1" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="itemCategory">Category:</label>
-                                                        <select id="itemCategory" required>
-                                                            <option value="produce">Produce</option>
-                                                            <option value="dairy">Dairy</option>
-                                                            <option value="meat">Meat</option>
-                                                            <option value="pantry">Pantry</option>
-                                                            <option value="spices">Spices</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="expirationDate">Expiration Date:</label>
-                                                        <input type="date" id="expirationDate">
-                                                    </div>
-                                                </div>
-                                                <div class="form-buttons">
-                                                    <button onclick="addItem()" class="primary">Add Item</button>
-                                                    <button onclick="toggleForm('inventoryForm')" class="secondary">Cancel</button>
-                                                </div>
-                                            </div>
-                            
-                                            <!-- Inventory List -->
-                                            <div class="inventory-container">
-                                                <div class="filters">
-                                                    <button class="filter-btn active" onclick="filterItems('all')">
-                                                        <i class="fas fa-th-large"></i> All
-                                                    </button>
-                                                    <button class="filter-btn" onclick="filterItems('produce')">
-                                                        <i class="fas fa-carrot"></i> Produce
-                                                    </button>
-                                                    <button class="filter-btn" onclick="filterItems('dairy')">
-                                                        <i class="fas fa-cheese"></i> Dairy
-                                                    </button>
-                                                    <button class="filter-btn" onclick="filterItems('meat')">
-                                                        <i class="fas fa-drumstick-bite"></i> Meat
-                                                    </button>
-                                                    <button class="filter-btn" onclick="filterItems('pantry')">
-                                                        <i class="fas fa-box"></i> Pantry
-                                                    </button>
-                                                    <button class="filter-btn" onclick="filterItems('spices')">
-                                                        <i class="fas fa-pepper-hot"></i> Spices
-                                                    </button>
-                                                </div>
-                                                <div id="inventoryList" class="grid-list">
-                                                    <!-- Items will be dynamically added here -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                            
-                                    <!-- Other sections remain the same -->
-                                    
-                                </main>
-                            
-                                <footer>
-                                    <div class="container">
-                                        <div class="footer-content">
-                                            <div class="footer-section">
-                                                <h3>Kitchen Management System</h3>
-                                                <p>Organize your kitchen like a pro</p>
-                                            </div>
-                                            <div class="footer-section">
-                                                <h3>Quick Links</h3>
-                                                <ul>
-                                                    <li><a href="#inventory">Inventory</a></li>
-                                                    <li><a href="#recipes">Recipes</a></li>
-                                                    <li><a href="#shopping">Shopping List</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="footer-bottom">
-                                            <p>&copy; 2024 Kitchen Management System. All rights reserved.</p>
-                                        </div>
-                                    </div>
-                                </footer>
-                            </body>
-                            </html>click="addToShoppingList()" class="primary">Add to List</button>
+                        <button onclick="addToShoppingList()" class="primary">Add to List</button>
                         <button onclick="toggleForm('shoppingForm')" class="secondary">Cancel</button>
                     </div>
                 </div>
@@ -313,10 +205,5 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Kitchen Management System. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>

@@ -156,6 +156,36 @@ nav {
     color: var(--danger-color);
 }
 
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: white;
+    transition: var(--transition);
+    margin-bottom: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
 /* Enhanced Inventory List Styles */
 .grid-list {
     display: grid;
@@ -284,5 +314,5 @@ footer {
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2
+    gap: 2rem;
 }
