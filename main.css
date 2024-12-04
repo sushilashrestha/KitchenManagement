@@ -61,7 +61,7 @@ nav {
 }
 
 .nav-btn {
-  background: #007bff;
+  background: #28a745; /* Changed from #007bff to #28a745 */
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -81,7 +81,7 @@ nav {
 
 .nav-btn:hover,
 .nav-btn.active {
-  background: #0056b3;
+  background: #1e7e34; /* Changed from #0056b3 to #1e7e34 */
   transform: translateY(-2px);
 }
 
@@ -201,7 +201,7 @@ select:focus {
 }
 
 .primary {
-  background: #007bff;
+  background: #28a745; /* Changed from #007bff to #28a745 */
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -330,7 +330,7 @@ select:focus {
 
 .filter-btn:hover,
 .filter-btn.active {
-  background: #007bff;
+  background: #28a745; /* Changed from #007bff to #28a745 */
   color: white;
   transform: translateY(-2px);
 }
