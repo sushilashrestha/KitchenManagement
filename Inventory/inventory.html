@@ -5,99 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitchen Management System</title>
     <link rel="stylesheet" href="inventory.css">
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Kitchen Management System</h1>
+            <h1><i class="fas fa-utensils"></i> Kitchen Management System</h1>
+            <nav>
+                <button onclick="showSection('inventory')" class="nav-btn active">Inventory</button>
+                <button onclick="showSection('recipes')" class="nav-btn">Recipes</button>
+                <button onclick="showSection('shopping')" class="nav-btn">Shopping List</button>
+            </nav>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#inventory">Inventory</a></li>
-                <li><a href="#recipes">Recipes</a></li>
-                <li><a href="#tasks">Tasks</a></li>
-                <li><a href="#settings">Settings</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <main>
         <!-- Inventory Section -->
-        <section id="inventory" class="section">
+        <section id="inventory" class="section active">
             <div class="container">
-                <h2>Inventory</h2>
-                <button class="add-item" onclick="toggleForm('inventoryForm')">Add New Item</button>
-                
-                <!-- Inventory Form -->
-                <div id="inventoryForm" class="form-container">
-                    <input type="text" id="itemName" placeholder="Item Name">
-                    <input type="number" id="itemQuantity" placeholder="Quantity">
-                    <input type="text" id="itemLocation" placeholder="Storage Location">
-                    <button onclick="addItem()">Add Item</button>
-                    <button onclick="toggleForm('inventoryForm')">Cancel</button>
+                <div class="section-header">
+                    <h2><i class="fas fa-boxes"></i> Inventory</h2>
+                    <div class="controls">
+                        <input type="text" id="inventorySearch" placeholder="Search inventory..." onkeyup="searchInventory()">
+                        <button class="add-item" onclick="toggleForm('inventoryForm')">
+                            <i class="fas fa-plus"></i> Add New Item
+                        </button>
+                    </div>
                 </div>
 
-                <ul id="inventoryList">
-                    <!-- Inventory items will be dynamically added here -->
-                </ul>
+                <!-- Inventory Form -->
+                <div id="inventoryForm" class="form-container">
+                    <div class="form-group">
+                        <label for="itemName">Item Name:</label>
+                        <input type="text" id="itemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemQuantity">Quantity:</label>
+                        <input type="number" id="itemQuantity" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemCategory">Category:</label>
+                        <select id="itemCategory" required>
+                            <option value="produce">Produce</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="meat">Meat</option>
+                            <option value="pantry">Pantry</option>
+                            <option value="spices">Spices</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expirationDate">Expiration Date:</label>
+                        <input type="date" id="expirationDate">
+                    </div>
+                    <div class="form-buttons">
+                        <button onclick="addItem()" class="primary">Add Item</button>
+                        <button onclick="toggleForm('inventoryForm')" class="secondary">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Inventory List -->
+                <div class="inventory-container">
+                    <div class="filters">
+                        <button class="filter-btn active" onclick="filterItems('all')">All</button>
+                        <button class="filter-btn" onclick="filterItems('produce')">Produce</button>
+                        <button class="filter-btn" onclick="filterItems('dairy')">Dairy</button>
+                        <button class="filter-btn" onclick="filterItems('meat')">Meat</button>
+                        <button class="filter-btn" onclick="filterItems('pantry')">Pantry</button>
+                        <button class="filter-btn" onclick="filterItems('spices')">Spices</button>
+                    </div>
+                    <ul id="inventoryList" class="grid-list">
+                        <!-- Items will be dynamically added here -->
+                    </ul>
+                </div>
             </div>
         </section>
 
         <!-- Recipes Section -->
         <section id="recipes" class="section">
             <div class="container">
-                <h2>Recipes</h2>
-                <button class="add-recipe" onclick="toggleForm('recipeForm')">Add New Recipe</button>
-                
+                <div class="section-header">
+                    <h2><i class="fas fa-book-open"></i> Recipes</h2>
+                    <button class="add-item" onclick="toggleForm('recipeForm')">
+                        <i class="fas fa-plus"></i> Add New Recipe
+                    </button>
+                </div>
+
                 <!-- Recipe Form -->
                 <div id="recipeForm" class="form-container">
-                    <input type="text" id="recipeName" placeholder="Recipe Name">
-                    <textarea id="recipeInstructions" placeholder="Recipe Instructions"></textarea>
-                    <button onclick="addRecipe()">Add Recipe</button>
-                    <button onclick="toggleForm('recipeForm')">Cancel</button>
+                    <div class="form-group">
+                        <label for="recipeName">Recipe Name:</label>
+                        <input type="text" id="recipeName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeIngredients">Ingredients:</label>
+                        <textarea id="recipeIngredients" rows="4" placeholder="Enter ingredients, one per line"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeInstructions">Instructions:</label>
+                        <textarea id="recipeInstructions" rows="6" placeholder="Enter cooking instructions"></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button onclick="addRecipe()" class="primary">Add Recipe</button>
+                        <button onclick="toggleForm('recipeForm')" class="secondary">Cancel</button>
+                    </div>
                 </div>
 
-                <ul id="recipeList">
+                <!-- Recipe List -->
+                <div id="recipeList" class="grid-list">
                     <!-- Recipes will be dynamically added here -->
-                </ul>
+                </div>
             </div>
         </section>
 
-        <!-- Tasks Section -->
-        <section id="tasks" class="section">
+        <!-- Shopping List Section -->
+        <section id="shopping" class="section">
             <div class="container">
-                <h2>Tasks</h2>
-                <button class="add-task" onclick="toggleForm('taskForm')">Add New Task</button>
-                
-                <!-- Task Form -->
-                <div id="taskForm" class="form-container">
-                    <input type="text" id="taskName" placeholder="Task Name">
-                    <button onclick="addTask()">Add Task</button>
-                    <button onclick="toggleForm('taskForm')">Cancel</button>
+                <div class="section-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Shopping List</h2>
+                    <button class="add-item" onclick="toggleForm('shoppingForm')">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
                 </div>
 
-                <ul id="taskList">
-                    <!-- Tasks will be dynamically added here -->
+                <!-- Shopping List Form -->
+                <div id="shoppingForm" class="form-container">
+                    <div class="form-group">
+                        <label for="shoppingItem">Item Name:</label>
+                        <input type="text" id="shoppingItem" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shoppingQuantity">Quantity:</label>
+                        <input type="number" id="shoppingQuantity" min="1" value="1" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button onclick="addToShoppingList()" class="primary">Add to List</button>
+                        <button onclick="toggleForm('shoppingForm')" class="secondary">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Shopping List -->
+                <ul id="shoppingList" class="checklist">
+                    <!-- Shopping items will be dynamically added here -->
                 </ul>
-            </div>
-        </section>
-
-        <!-- Settings Section -->
-        <section id="settings" class="section">
-            <div class="container">
-                <h2>User Settings</h2>
-                <form id="settingsForm">
-                  
-
-                 <label for="notifications">Enable Notifications:</label>
-                    <input type="checkbox" id="notifications" name="notifications">
-
-                    <button type="submit">Save Settings</button>
-                </form>
             </div>
         </section>
     </main>
